@@ -8,21 +8,21 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
         className="Bar"
         gdkmonitor={gdkmonitor}
         exclusivity={Astal.Exclusivity.EXCLUSIVE}
-        anchor={Astal.WindowAnchor.TOP
-            | Astal.WindowAnchor.LEFT
-            | Astal.WindowAnchor.RIGHT}
+        anchor={Astal.WindowAnchor.LEFT
+            | Astal.WindowAnchor.BOTTOM
+            | Astal.WindowAnchor.TOP}
         application={App}>
-        <centerbox>
-            <button
-                onClicked="echo hello"
-                halign={Gtk.Align.CENTER} >
-                Welcome to AGS!
-            </button>
+        <centerbox vertical={true}>
             <box />
             <button
+                onClicked="echo hello"
+                valign={Gtk.Align.CENTER} >
+                <label label={"10\n:\n20"} />
+            </button>
+            <button
                 onClick={() => print("hello")}
-                halign={Gtk.Align.CENTER} >
-                <label label={time()} />
+                valign={Gtk.Align.CENTER} >
+                <label label={"21\n:\n11"} />
             </button>
         </centerbox>
     </window>
