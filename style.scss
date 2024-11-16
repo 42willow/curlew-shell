@@ -17,4 +17,9 @@ window.Bar {
         border-radius: 8px;
         margin: 2px;
     }
+
+    button.focused {
+        background: #{$theme_fg_color};
+        color: #{$theme_bg_color};
+    }    
 }
