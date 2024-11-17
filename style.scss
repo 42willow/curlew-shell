@@ -9,17 +9,22 @@ window.Bar {
 
   > centerbox {
     background: #{$theme_bg_color};
-    border-radius: 10px;
-    margin: 8px;
+    padding: 8px;
+    // border-radius: 10px;
+    // margin: 8px;
   }
 
   button {
     border-radius: 8px;
-    margin: 2px;
+    margin-bottom: 8px;
   }
 
   button.focused {
     background: #{$theme_fg_color};
     color: #{$theme_bg_color};
+  }
+
+  .time {
+    font-family: monospace;
   }
 }

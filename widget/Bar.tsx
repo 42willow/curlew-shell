@@ -1,6 +1,9 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk3";
+import { App, Astal, Gdk } from "astal/gtk3";
 import { Variable } from "astal";
 import { Workspaces } from "./modules/Workspaces";
+import { Time } from "./modules/Time";
+import { Power } from "./modules/Power";
+import {MprisPlayers} from "./modules/Mpris";
 
 const time = Variable("").poll(1000, "date");
 
@@ -13,16 +16,17 @@ export default function Bar(gdkmonitor: Gdk.Monitor) {
       anchor={Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.TOP}
       application={App}>
       <centerbox vertical={true}>
-        <box>
+        <box vertical={true}>
           <Workspaces />
         </box>
-        <box />
-        <button onClicked="echo hello" valign={Gtk.Align.CENTER}>
-          <label label={"10\n:\n20"} />
+        <button>
+          <Time />
         </button>
-        <button onClick={() => print("hello")} valign={Gtk.Align.CENTER}>
-          <label label={"21\n:\n11"} />
+        <MprisPlayers />
+        <button>
+          <Power />
         </button>
+        <box vertical={true} />
       </centerbox>
     </window>
   );
