@@ -3,28 +3,17 @@ $fg: "@theme_fg_color";
 $bg: "@theme_bg_color";
 
 window.Bar {
-  background: transparent;
+  background: #{$bg};
   color: #{$bg};
   font-weight: bold;
 
-  > centerbox {
-    background: #{$bg};
-    padding: 8px;
-    // border-radius: 10px;
-    // margin: 8px;
-  }
-
   button {
     border-radius: 8px;
-    margin-bottom: 8px;
+    margin: 4px;
   }
 
   button.focused {
     background: #{$fg};
     color: #{$bg};
-  }
-
-  .time {
-    font-family: monospace;
   }
 }
