@@ -5,7 +5,6 @@ import FocusedClient from "./modules/FocusedClient";
 import Media from "./modules/Media";
 import Time from "./modules/Time";
 import SysTray from "./modules/Tray";
-import Wifi from "./modules/Wifi";
 import Workspaces from "./modules/Workspaces";
 
 export default function Bar(monitor: Gdk.Monitor) {
@@ -23,7 +22,6 @@ export default function Bar(monitor: Gdk.Monitor) {
         </box>
         <box hexpand halign={Gtk.Align.END}>
           <SysTray />
-          <Wifi />
           <AudioSlider />
           <BatteryLevel />
           <Time />
