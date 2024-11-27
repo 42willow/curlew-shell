@@ -15,7 +15,7 @@ export default function Bar(monitor: Gdk.Monitor) {
       <centerbox>
         <box hexpand halign={Gtk.Align.START}>
           <Workspaces />
-          <FocusedClient />
+          {/* <FocusedClient /> */}
         </box>
         <box>
           <Media />
