@@ -31,7 +31,7 @@ function range(length: number, start = 1) {
 
 export default function Workspaces({ gdkmonitor }: WorkspacesProps) {
   const hypr = Hyprland.get_default();
-  const ws: number = 10;
+  const ws: number = 9;
 
   // TODO: use calc workspace count to dynamically adjust the number of workspaces
   // This will require binding the workspace count?
