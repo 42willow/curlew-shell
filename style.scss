@@ -1,15 +1,44 @@
 @use "sass:color";
 
-$bg: #24273a;
-$fg: #cad3f5;
+$text: #cad3f5;
+$subtext1: #b8c0e0;
+$subtext0: #a5adcb;
+$overlay2: #939ab7;
+$overlay1: #8087a2;
+$overlay0: #6e738d;
+$surface2: #5b6078;
+$surface1: #494d64;
+$surface0: #363a4f;
+$base: #24273a;
+$mantle: #1e2030;
+$crust: #181926;
+
 $accent: #f5bde6;
+
 $radius: 7px;
+
+// Add horizontal space between all direct child elements.
+@mixin space-between-x($space) {
+  >*+* {
+    margin-left: $space;
+  }
+}
+
+// Add vertical space between all direct child elements.
+@mixin space-between-y($space) {
+  >*+* {
+    margin-top: $space;
+  }
+}
+@mixin rounded-full {
+  border-radius: 9999px;
+}
 
 window.Bar {
   border: none;
   box-shadow: none;
-  background-color: $bg;
-  color: $fg;
+  background-color: $base;
+  color: $text;
   font-size: 1.1em;
   font-weight: bold;
 
@@ -18,12 +47,12 @@ window.Bar {
     background-color: transparent;
 
     &:hover label {
-      background-color: color.adjust($fg, $alpha: -0.84);
+      background-color: color.adjust($text, $alpha: -0.84);
       border-color: color.adjust($accent, $alpha: -0.8);
     }
 
     &:active label {
-      background-color: color.adjust($fg, $alpha: -0.8);
+      background-color: color.adjust($text, $alpha: -0.8);
     }
   }
 
@@ -35,9 +64,37 @@ window.Bar {
     border: 1pt solid transparent;
   }
 
-  .Workspaces .focused label {
-    color: $accent;
-    border-color: $accent;
+  .workspaces {
+    padding-top: 0.870em;
+    padding-bottom: 0.870em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+    margin-left: 0.62em;
+
+    @include space-between-x(0.5em);
+  }
+
+  .workspaces-indicator {
+    @include rounded-full;
+
+    transition-property: min-width, background-color;
+    transition-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+    transition-duration: 200ms;
+
+    min-width: 0.45em;
+    min-height: 0.45em;
+    background-color: $overlay0;
+
+    &.active,
+    &:active {
+      min-height: 0.6em;
+      min-width: 1.7em;
+
+      margin-bottom: -0.20em;
+      margin-top: -0.20em;
+
+      background-color: $overlay2;
+    }
   }
 
   .FocusedClient {
@@ -71,7 +128,7 @@ window.Bar {
     }
 
     trough {
-      background-color: color.adjust($fg, $alpha: -0.8);
+      background-color: color.adjust($text, $alpha: -0.8);
       border-radius: $radius;
     }
 
@@ -82,7 +139,7 @@ window.Bar {
     }
 
     slider {
-      background-color: $fg;
+      background-color: $text;
       border-radius: $radius;
       min-height: 1em;
       min-width: 1em;

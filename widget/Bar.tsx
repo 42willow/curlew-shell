@@ -14,7 +14,7 @@ export default function Bar(monitor: Gdk.Monitor) {
     <window className="Bar" gdkmonitor={monitor} exclusivity={Astal.Exclusivity.EXCLUSIVE} anchor={TOP | LEFT | RIGHT}>
       <centerbox>
         <box hexpand halign={Gtk.Align.START}>
-          <Workspaces />
+          <Workspaces gdkmonitor={monitor} />
           {/* <FocusedClient /> */}
         </box>
         <box>
