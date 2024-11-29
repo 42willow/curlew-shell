@@ -39,8 +39,8 @@ window.Bar {
   box-shadow: none;
   background-color: $base;
   color: $text;
-  font-size: 1.1em;
-  font-weight: bold;
+  font-size: 1em;
+  font-family: "Inter";
 
   button {
     all: unset;
@@ -95,6 +95,15 @@ window.Bar {
 
       background-color: $overlay2;
     }
+  }
+
+  .time {
+    background: $surface0;
+    color: $text;
+    padding-top: 0.4em;
+    padding-bottom: 0.26em;
+    margin: 0.3em;
+    border-radius: $radius;
   }
 
   .FocusedClient {

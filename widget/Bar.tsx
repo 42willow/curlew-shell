@@ -18,13 +18,13 @@ export default function Bar(monitor: Gdk.Monitor) {
           {/* <FocusedClient /> */}
         </box>
         <box>
+          <Time />
           <Media />
         </box>
         <box hexpand halign={Gtk.Align.END}>
           <SysTray />
           <AudioSlider />
           <BatteryLevel />
-          <Time />
         </box>
       </centerbox>
     </window>
