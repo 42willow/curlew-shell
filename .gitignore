@@ -1,3 +1,6 @@
-@girs/
 node_modules/
+build/
+result
+result/
+@types/
 .direnv/

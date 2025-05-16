@@ -1,40 +1,52 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    ags.url = "github:aylur/ags";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
-    ags,
+    astal,
   }: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    curlew = pkgs.writers.writePython3Bin "cl" {} (builtins.readFile ./curlew.py);
-  in {
-    devShells.${system}.default = pkgs.mkShell {
-      shellHook = ''
-        echo "hiii :)"
-        echo "you can run the start script using: ${nixpkgs.lib.getName curlew}"
-      '';
 
-      buildInputs = [
-        curlew
-        # includes astal3 astal4 astal-io by default
-        (ags.packages.${system}.default.override {
-          extraPackages = [
-            ags.packages.${system}.hyprland
-            ags.packages.${system}.mpris
-            ags.packages.${system}.wireplumber
-            ags.packages.${system}.network
-            ags.packages.${system}.tray
-            ags.packages.${system}.io
-            ags.packages.${system}.battery
-            ags.packages.${system}.notifd
-          ];
-        })
-      ];
+    nativeBuildInputs = with pkgs; [
+      meson
+      ninja
+      pkg-config
+      gobject-introspection
+      wrapGAppsHook4
+      blueprint-compiler
+      dart-sass
+      esbuild
+    ];
+
+    astalPackages = with astal.packages.${system}; [
+      io
+      astal4
+      battery
+      wireplumber
+      network
+      mpris
+      powerprofiles
+      tray
+      bluetooth
+    ];
+  in {
+    packages.${system}.default = pkgs.stdenv.mkDerivation {
+      name = "simple-bar";
+      src = ./.;
+      inherit nativeBuildInputs;
+      buildInputs = astalPackages ++ [pkgs.gjs];
+    };
+
+    devShells.${system}.default = pkgs.mkShell {
+      packages = nativeBuildInputs ++ astalPackages ++ [pkgs.gjs];
     };
   };
 }
