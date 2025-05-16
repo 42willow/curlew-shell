@@ -39,7 +39,7 @@
     ];
   in {
     packages.${system}.default = pkgs.stdenv.mkDerivation {
-      name = "simple-bar";
+      name = "curlew-shell";
       src = ./.;
       inherit nativeBuildInputs;
       buildInputs = astalPackages ++ [pkgs.gjs];

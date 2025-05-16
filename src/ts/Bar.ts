@@ -33,7 +33,6 @@ export default class Bar extends Astal.Window {
           ...boolean("mpris-visible"),
           ...string("mpris-label"),
           ...string("mpris-art"),
-          ...string("power-profile-icon"),
           ...boolean("bluetooth-visible"),
         },
       },
@@ -60,7 +59,7 @@ export default class Bar extends Astal.Window {
 
     // clock
     const timer = AstalIO.Time.interval(1000, () => {
-      this.clock = GLib.DateTime.new_now_local().format("%H:%M:%S")!;
+      this.clock = GLib.DateTime.new_now_local().format("%I:%M:%S %p")!;
     });
     this.connect("destroy", () => timer.cancel());
 
@@ -116,7 +115,7 @@ export default class Bar extends Astal.Window {
     speaker.bind_property("volume", this, "volume", SYNC);
 
     // mpris
-    const player = AstalMpris.Player.new("spotify");
+    const player = AstalMpris.Player.new("mpd");
     player.bind_property("available", this, "mpris-visible", SYNC);
     player.bind_property("cover-art", this, "mpris-art", SYNC);
 
@@ -125,10 +124,6 @@ export default class Bar extends Astal.Window {
       this.mpris_label = `${player.artist} - ${player.title}`;
     });
     this.connect("destroy", () => player.disconnect(playerId));
-
-    // powerprofiles
-    const powerprofile = AstalPowerProfiles.get_default();
-    powerprofile.bind_property("icon-name", this, "power-profile-icon", SYNC);
 
     // tray
     const tray = AstalTray.get_default();

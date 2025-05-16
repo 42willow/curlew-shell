@@ -11,7 +11,7 @@ export default class App extends Astal.Application {
   }
 
   static instance: App;
-  static instanceName = "simple-bar";
+  static instanceName = "curlew-shell";
 
   // this is where request handlers can be implemented
   // that will be used to handle `astal` cli invocations
