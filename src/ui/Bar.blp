@@ -22,13 +22,47 @@ template $Bar: Astal.Window {
         center-widget: Box {
             Box {
                 visible: bind template.mpris-visible;
+                name: "media-player";
 
-                Image {
-                    file: bind template.mpris-art;
+                Box {
+                    name: "info";
+
+                    Image {
+                        file: bind template.mpris-art;
+                        margin-end: 8;
+                    }
+
+                    Label {
+                        label: bind template.mpris-label;
+                    }
                 }
 
-                Label {
-                    label: bind template.mpris-label;
+                Box {
+                    name: "controls";
+
+                    Button {
+                        visible: bind template.mpris-can-go-previous;
+                        icon-name: "media-skip-backward";
+                        clicked => $mpris_previous();
+                    }
+
+                    Button {
+                        visible: bind template.mpris-can-play;
+                        icon-name: "media-playback-start";
+                        clicked => $mpris_play();
+                    }
+
+                    Button {
+                        visible: bind template.mpris-can-pause;
+                        icon-name: "media-playback-pause";
+                        clicked => $mpris_pause();
+                    }
+
+                    Button {
+                        visible: bind template.mpris-can-go-next;
+                        icon-name: "media-skip-forward";
+                        clicked => $mpris_next();
+                    }
                 }
             }
         };

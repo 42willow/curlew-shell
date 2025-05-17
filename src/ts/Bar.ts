@@ -33,6 +33,10 @@ export default class Bar extends Astal.Window {
           ...boolean("mpris-visible"),
           ...string("mpris-label"),
           ...string("mpris-art"),
+          ...boolean("mpris-can-play"),
+          ...boolean("mpris-can-pause"),
+          ...boolean("mpris-can-go-next"),
+          ...boolean("mpris-can-go-previous"),
           ...boolean("bluetooth-visible"),
         },
       },
@@ -116,6 +120,10 @@ export default class Bar extends Astal.Window {
 
     // mpris
     const player = AstalMpris.Player.new("mpd");
+    player.bind_property("can-play", this, "mpris-can-play", SYNC);
+    player.bind_property("can-pause", this, "mpris-can-pause", SYNC);
+    player.bind_property("can-go-next", this, "mpris-can-go-next", SYNC);
+    player.bind_property("can-go-previous", this, "mpris-can-go-previous", SYNC);
     player.bind_property("available", this, "mpris-visible", SYNC);
     player.bind_property("cover-art", this, "mpris-art", SYNC);
 
@@ -165,5 +173,22 @@ export default class Bar extends Astal.Window {
 
   change_volume(_scale: Gtk.Scale, _type: Gtk.ScrollType, value: number) {
     AstalWp.get_default()?.defaultSpeaker.set_volume(value);
+  }
+
+  mpris_play() {
+    const player = AstalMpris.Player.new("mpd");
+    player.play();
+  }
+  mpris_pause() {
+    const player = AstalMpris.Player.new("mpd");
+    player.pause();
+  }
+  mpris_next() {
+    const player = AstalMpris.Player.new("mpd");
+    player.next();
+  }
+  mpris_previous() {
+    const player = AstalMpris.Player.new("mpd");
+    player.previous();
   }
 }
